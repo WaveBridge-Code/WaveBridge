@@ -1,0 +1,108 @@
+seed_everything: 42
+
+trainer:
+  accelerator: gpu
+  strategy: ddp_find_unused_parameters_true
+  devices: [0]
+  num_nodes: 1
+  precision: 32
+  logger:
+    - class_path: CSVLogger
+      init_args:
+        save_dir: logs
+        name: wavebridge
+  callbacks:
+    - class_path: ModelCheckpoint
+      init_args:
+        every_n_epochs: 5
+        save_on_train_epoch_end: true
+        save_top_k: -1
+    - class_path: LearningRateMonitor
+      init_args:
+        logging_interval: step
+  max_epochs: 50
+  check_val_every_n_epoch: 5
+  num_sanity_val_steps: 0
+  log_every_n_steps: 10
+  deterministic: true
+  inference_mode: true
+  use_distributed_sampler: true
+  sync_batchnorm: true
+
+model:
+  lr_g: 0.0002
+  lr_d: 0.0001
+  disc_grad_penalty_freq: 5
+  disc_grad_penalty_weight: 1
+  lambda_rec_loss: 1
+  lambda_content_loss: 500
+  lambda_hf: 50
+  optim_betas: [0.5, 0.9]
+  eval_mask: false
+  eval_subject: false
+  use_pytorch_wavelet: false
+  current_resolution: 128
+  use_wandb: false
+  input_channels: 9
+
+  diffusion_params:
+    n_steps: 10
+    beta_start: 0.1
+    beta_end: 3.0
+    gamma: 1.5
+    n_recursions: 2
+    consistency_threshold: 0.01
+
+  generator_params:
+    self_recursion: true
+    image_size: ${data.image_size}
+    z_emb_dim: 256
+    ch_mult: [1, 2, 2, 4]
+    num_res_blocks: 2
+    attn_resolutions: [8]
+    dropout: 0.0
+    resamp_with_conv: true
+    conditional: true
+    fir: true
+    fir_kernel: [1, 3, 3, 1]
+    skip_rescale: true
+    resblock_type: biggan
+    progressive: none
+    progressive_input: residual
+    embedding_type: positional
+    combine_method: sum
+    fourier_scale: 16
+    nf: 64
+    num_channels: 108
+    nz: 100
+    n_mlp: 3
+    centered: true
+    not_use_tanh: true
+    no_use_freq: false
+    no_use_fbn: false
+    no_use_residual: false
+    window_size: 4
+    mlp_ratio: 4
+    swin_depth: 2
+    out_channels: 9
+
+  discriminator_params:
+    nc: 72
+    ngf: 32
+    t_emb_dim: 256
+    num_layers: 6
+
+data:
+  dataset_dir: ./data
+  source_modality: MRI
+  target_modality: PET
+  dataset_class: NumpyDataset
+  image_size: 128
+  padding: true
+  norm: true
+  train_batch_size: 4
+  val_batch_size: 4
+  test_batch_size: 32
+  num_workers: 1
+
+ckpt_path:

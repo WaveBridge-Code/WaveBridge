@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the associated WaveBridge paper."
+title: "WaveBridge"
+authors:
+  - name: "WaveBridge Contributors"
+repository-code: "https://github.com/WaveBridge-Code/WaveBridge"
+license: "MIT"

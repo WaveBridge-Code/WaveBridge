@@ -1,0 +1,35 @@
+name: wavebridge
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pytorch::pytorch=1.13.1
+  - torchvision=0.14.1
+  - nvidia::cudatoolkit=11.7
+  - lightning=2.2.4
+  - numpy
+  - pandas
+  - scikit-image
+  - scikit-learn
+  - matplotlib
+  - pyyaml
+  - pywavelets
+  - einops
+  - timm
+  - tqdm
+  - pillow
+  - nibabel
+  - ninja
+  - rich
+  - omegaconf
+  - pip
+  - pip:
+      - jsonargparse[signatures]>=4.27.7
+      - piq
+      - pytorch-msssim
+      - pytorch-wavelets
+      - lpips
+      - wandb

@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Experiment outputs
+logs/
+wandb/
+outputs/
+results/
+result/
+figures/
+sample_images/
+checkpoints/
+
+# Data and generated medical-imaging artifacts
+data/
+datasets/
+*.npy
+*.npz
+*.nii
+*.nii.gz
+*.ckpt
+*.pt
+*.pth
+*.pkl
+*.h5
+*.hdf5
+
+# Generated reports and tables
+*.csv
+*.tsv
+*.xlsx
+*.png
+*.jpg
+*.jpeg
+*.gif
