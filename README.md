@@ -14,9 +14,6 @@ This repository contains code only. Datasets, trained checkpoints, generated `.n
 |-- utils.py                   # Metrics and visualization helpers
 |-- config.yaml                # Sanitized default training/testing config
 |-- backbones/                 # Model, wavelet, and CUDA op components
-|-- scripts/
-|   |-- postprocessing/        # Prediction conversion and visualization utilities
-|   `-- analysis/              # Metric/case-selection utilities used for paper analysis
 ```
 
 ## Installation
